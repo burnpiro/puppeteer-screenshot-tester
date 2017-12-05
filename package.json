@@ -1,0 +1,21 @@
+{
+  "name": "puppeteer-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "fs": "^0.0.1-security",
+    "fs-extra": "^4.0.2",
+    "jest": "^21.2.1",
+    "parent-module": "^0.1.0",
+    "path": "^0.12.7",
+    "pixelmatch": "^4.0.2",
+    "pngjs": "^3.3.1",
+    "puppeteer": "^0.13.0"
+  }
+}
