@@ -7,7 +7,7 @@
     "test": "jest"
   },
   "author": "Kemal Erdem",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "parent-module": "^0.1.0",
     "path": "^0.12.7",
