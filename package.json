@@ -8,13 +8,15 @@
   },
   "author": "Kemal Erdem",
   "license": "ISC",
-  "devDependencies": {
-    "fs": "^0.0.1-security",
-    "jest": "^21.2.1",
+  "dependencies": {
     "parent-module": "^0.1.0",
     "path": "^0.12.7",
     "pixelmatch": "^4.0.2",
     "pngjs": "^3.3.1",
+    "fs": "^0.0.1-security",
+  },
+  "devDependencies": {
+    "jest": "^21.2.1",
     "puppeteer": "^0.13.0"
   }
 }
