@@ -38,9 +38,10 @@ const tester = await ScreenshotTester()
 
 create test runner with optional config
 
-#### constructor(page[, name = 'test'])
+#### constructor(page[, name = 'test'[, screenshotOptions = {}]])
 - `page` <[BrowserPage]> BrowserPage returned by puppeteer when calling `puppeteer.lunch().newPage()`
 - `name` <[string]> name of created screenshot 'test' by default
+- `screenshotOptions` <[Object]> options passed to puppeteer's screenshot method [https://github.com/GoogleChrome/puppeteer/blob/master/docs/api.md#pagescreenshotoptions](https://github.com/GoogleChrome/puppeteer/blob/master/docs/api.md#pagescreenshotoptions)
 - returns: <[boolean]> true if images are the same or there is no image to compare (first run)
 ```js
 const result = tester(page)

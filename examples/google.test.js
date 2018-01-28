@@ -9,7 +9,7 @@ describe('google test', () => {
   // if you're running that on fast computer/server probably won't need to do that
   beforeEach(function() {
     originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL
-    jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000
   })
 
   // set default interval timeout for jasmine
@@ -30,7 +30,7 @@ describe('google test', () => {
 
     // call our tester with browser page returned by puppeteer browser
     // second parameter is optional it's just a test name if provide that's filename
-    const result = await tester(page, 'test2')
+    const result = await tester(page, 'test2', { fullPage: true })
     await browser.close()
 
     // make assertion result is always boolean

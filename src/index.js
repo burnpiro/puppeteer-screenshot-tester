@@ -10,7 +10,7 @@ const ScreenTestFactory = function(threshold = 0.1, includeAA = false) {
   // cannot use __directory because it returns module directory instead of caller
   const folderPath = path.dirname(parentModule())
   return new Promise( resolve => {
-    resolve(async (page, name = 'test') => {
+    resolve(async (page, name = 'test', screenshotOptions = {}) => {
       // we need that to pixelmatch and creating diff
       const {width, height} = page.viewport()
 
@@ -18,7 +18,7 @@ const ScreenTestFactory = function(threshold = 0.1, includeAA = false) {
       const oldImage = await getOldImageData(folderPath, name)
 
       // get page object from puppeteer and create screenshot without path to receive Buffer
-      const screenShot = await page.screenshot({})
+      const screenShot = await page.screenshot(screenshotOptions)
       if (oldImage !== undefined) {
         // if there is old image we can compare it with current screenshot
         const diff = new PNG({width, height})
