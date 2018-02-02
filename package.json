@@ -10,10 +10,9 @@
   "license": "MIT",
   "dependencies": {
     "fs": "^0.0.1-security",
+    "node-resemble-js": "^0.2.0",
     "parent-module": "^0.1.0",
-    "path": "^0.12.7",
-    "pixelmatch": "^4.0.2",
-    "pngjs": "^3.3.1"
+    "path": "^0.12.7"
   },
   "devDependencies": {
     "jest": "22.1.4",
