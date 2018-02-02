@@ -30,11 +30,23 @@ const ScreenshotTester = require('puppeteer-screenshot-tester')
 
 create test runner with optional config
 
-#### constructor([threshold = 0.02][, includeAA = false[, ignoreColors = false[, ignoreRectangles = [] ]]])
-- `threshold` <[number]> A threshold value <0,1> default set to 0.02, max ratio of difference between images
+#### constructor([threshold = 0][, includeAA = false[, ignoreColors = false[, ignoreRectangles = [] [, errorSettings = Object] ]]])
+- `threshold` <[number]> A threshold value <0,1> default set to 0, max ratio of difference between images
 - `includeAA` <[boolean]> should include anti aliasing?
 - `ignoreColors` <[boolean]> should ignore colors?
 - `ignoreRectangles` <[Array<Array[x, y, width, height]>]> should ignore rectangles? example: `[[325,170,100,40], [10,10,200,200]]`
+- `errorSettings` <[Object]> change how to display errors (errorType: `flat` | `movement` | `flatDifferenceIntensity` | `movementDifferenceIntensity` | `diffOnly`): 
+```    
+{
+  errorColor: {
+    red: 255,
+    green: 0,
+    blue: 255
+  },
+  errorType: 'flat',
+  transparency: 0.7
+}
+```
 - returns: <[function]> resolves to function
 
 ```js
