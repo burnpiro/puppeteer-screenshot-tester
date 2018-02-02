@@ -4,16 +4,21 @@ const parentModule = require('parent-module');
 const path = require('path');
 
 // currying everywhere, that allows us to create one setup and then use tester without copying config each time
-const ScreenTestFactory = function(threshold = 0.02, includeAA = false, ignoreColors = false, ignoreRectangles = []) {
-  resemble.outputSettings({
+const ScreenTestFactory = function(
+  threshold = 0,
+  includeAA = false,
+  ignoreColors = false,
+  ignoreRectangles = [],
+  errorSettings = {
     errorColor: {
       red: 255,
       green: 0,
       blue: 255
     },
-    errorType: 'movement',
-    transparency: 0.2
-  });
+    errorType: 'flat',
+    transparency: 0.7
+  }) {
+  resemble.outputSettings(errorSettings);
   // get path to called directory
   // cannot use __directory because it returns module directory instead of caller
   const folderPath = path.dirname(parentModule());
