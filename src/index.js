@@ -24,8 +24,22 @@ const ScreenTestFactory = function(
   const folderPath = path.dirname(parentModule());
   return new Promise( resolve => {
     resolve(async (page, name = 'test', screenshotOptions = {}) => {
+      let saveFolder = folderPath;
+      let ext = '.png';
+      if(screenshotOptions.path != null) {
+        const puppeteerExt = path.extname(screenshotOptions.path);
+        const puppeteerPath = path.dirname(screenshotOptions.path);
+        const puppeteerFileName = path.basename(screenshotOptions.path, puppeteerExt);
+
+        if(typeof puppeteerFileName === 'string' && puppeteerFileName.length > 0 && typeof puppeteerPath === 'string' && puppeteerPath.length > 0) {
+          saveFolder = puppeteerPath;
+          name = puppeteerFileName;
+          ext = puppeteerExt || '.png';
+        }
+        delete screenshotOptions.path;
+      }
       // get existing image, might return undefined
-      const oldImage = await getOldImageData(folderPath, name);
+      const oldImage = await getOldImageData(saveFolder, name, ext);
 
       // get page object from puppeteer and create screenshot without path to receive Buffer
       const screenShot = await page.screenshot(screenshotOptions);
@@ -51,7 +65,7 @@ const ScreenTestFactory = function(
               // check if images are the same dimensions and mismatched pixels are below threshold
               if (data.isSameDimensions === false || Number(data.misMatchPercentage) > threshold * 100) {
                 // save diff to test folder with '-diff' postfix
-                data.getDiffImage().pack().pipe(fs.createWriteStream(`${folderPath}/${name}-diff.png`));
+                data.getDiffImage().pack().pipe(fs.createWriteStream(`${saveFolder}/${name}-diff${ext}`));
                 resolve(false)
               } else {
                 resolve(true)
@@ -60,7 +74,7 @@ const ScreenTestFactory = function(
         });
       } else {
         // if there is no old image we cannot compare two images so just write existing screenshot as default image
-        fs.writeFileSync(`${folderPath}/${name}.png`, screenShot);
+        fs.writeFileSync(`${saveFolder}/${name}${ext}`, screenShot);
         console.log('There was nothing to compare, current screes saved as default');
         return true;
       }
@@ -69,15 +83,15 @@ const ScreenTestFactory = function(
 }
 
 // returns promise which resolves with undefined or PNG object
-const getOldImageData = function(folderPath, name = 'test') {
+const getOldImageData = function(folderPath, name = 'test', ext = 'png') {
   return new Promise((resolve) => {
-    fs.stat(`${folderPath}/${name}.png`, (error) => {
+    fs.stat(`${folderPath}/${name}${ext}`, (error) => {
       if (error) {
         // if there is an error resolve with undefined
         resolve();
       } else {
         // if file exists just get file and pipe it into PNG
-        fs.readFile(`${folderPath}/${name}.png`, (err, data) => {
+        fs.readFile(`${folderPath}/${name}${ext}`, (err, data) => {
           if (err || !data instanceof Buffer) {
             resolve();
           } else {
