@@ -1,0 +1,34 @@
+{
+  "projectName": "puppeteer-screenshot-tester",
+  "projectOwner": "burnpiro",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "burnpiro",
+      "name": "Kemal Erdem",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/3284639?v=4",
+      "profile": "https://github.com/burnpiro",
+      "contributions": [
+        "code",
+        "doc",
+        "review"
+      ]
+    },
+    {
+      "login": "andismith",
+      "name": "Andi Smith",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/426677?v=4",
+      "profile": "http://www.andismith.com",
+      "contributions": [
+        "doc",
+        "test"
+      ]
+    }
+  ]
+}
