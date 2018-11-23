@@ -75,7 +75,7 @@ const ScreenTestFactory = function(
       } else {
         // if there is no old image we cannot compare two images so just write existing screenshot as default image
         fs.writeFileSync(`${saveFolder}/${name}${ext}`, screenShot);
-        console.log('There was nothing to compare, current screes saved as default');
+        console.log('There was nothing to compare, current screens saved as default');
         return true;
       }
     })
