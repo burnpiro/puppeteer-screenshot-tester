@@ -62,15 +62,15 @@ const ScreenTestFactory = function(
         // await for a comparison to be completed and return resolved value
         return await new Promise(resolve => {
           comparisonResult.onComplete((data) => {
-              // check if images are the same dimensions and mismatched pixels are below threshold
-              if (data.isSameDimensions === false || Number(data.misMatchPercentage) > threshold * 100) {
-                // save diff to test folder with '-diff' postfix
-                data.getDiffImage().pack().pipe(fs.createWriteStream(`${saveFolder}/${name}-diff${ext}`));
-                resolve(false)
-              } else {
-                resolve(true)
-              }
-            });
+            // check if images are the same dimensions and mismatched pixels are below threshold
+            if (data.isSameDimensions === false || Number(data.misMatchPercentage) > threshold * 100) {
+              // save diff to test   folder with '-diff' postfix
+              data.getDiffImage().pack().pipe(fs.createWriteStream(`${saveFolder}/${name}-diff${ext}`));
+              resolve(false)
+            } else {
+              resolve(true)
+            }
+          });
         });
       } else {
         // if there is no old image we cannot compare two images so just write existing screenshot as default image
@@ -82,14 +82,11 @@ const ScreenTestFactory = function(
   })
 }
 
-// returns promise which resolves with undefined or PNG object
-const getOldImageData = function(folderPath, name = 'test', ext = 'png') {
+// returns promise which  resolves with undefined or PNG object
+const getOldImageData = function (folderPath, name = 'test', ext = 'png') {
   return new Promise((resolve) => {
     fs.stat(`${folderPath}/${name}${ext}`, (error) => {
-      if (error) {
-        // if there is an error resolve with undefined
-        resolve();
-      } else {
+      if (!error) {
         // if file exists just get file and pipe it into PNG
         fs.readFile(`${folderPath}/${name}${ext}`, (err, data) => {
           if (err || !data instanceof Buffer) {
@@ -98,6 +95,9 @@ const getOldImageData = function(folderPath, name = 'test', ext = 'png') {
             resolve(data);
           }
         })
+      } else {
+        // if there is an error resolve with undefined
+        resolve();
       }
     })
   })
