@@ -63,7 +63,7 @@ const ScreenTestFactory = function(
         return await new Promise(resolve => {
           comparisonResult.onComplete((data) => {
               // check if images are the same dimensions and mismatched pixels are below threshold
-              if (data.isSameDimensions === false || Number(data.misMatchPercentage) > threshold * 100) {
+              if (data.isSameDimensions === false || Number(data.misMatchPercentage) > threshold) {
                 // save diff to test folder with '-diff' postfix
                 data.getDiffImage().pack().pipe(fs.createWriteStream(`${saveFolder}/${name}-diff${ext}`));
                 resolve(false)
