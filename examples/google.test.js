@@ -19,12 +19,12 @@ describe('google test', () => {
 
   it(`check if google exists`, async () => {
     // create ScreenshotTester with optional config
-    const tester = await ScreenshotTester(0.8, false, false, [], {
+    const tester = await ScreenshotTester(0.1, false, false, [], {
       transparency: 0.5
     })
 
     // setting up puppeteer
-    const browser = await puppeteer.launch()
+    const browser = await puppeteer.launch({headless: false})
     const page = await browser.newPage()
     await page.setViewport({width: 1920, height: 1080})
     await page.goto('https://www.google.com', { waitUntil: 'networkidle0' })
