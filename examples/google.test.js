@@ -34,6 +34,7 @@ describe('google test', () => {
     // second parameter is optional it's just a test name if provide that's filename
     const result = await tester(page, 'test2', {
       fullPage: true,
+      saveNewImageOnError: true
     })
     await browser.close()
 

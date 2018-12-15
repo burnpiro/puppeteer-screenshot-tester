@@ -66,6 +66,12 @@ const ScreenTestFactory = function(
               if (data.isSameDimensions === false || Number(data.misMatchPercentage) > threshold) {
                 // save diff to test folder with '-diff' postfix
                 data.getDiffImage().pack().pipe(fs.createWriteStream(`${saveFolder}/${name}-diff${ext}`));
+
+                // optionally save the new image to the test directory
+                if (screenshotOptions.saveNewImageOnError) {
+                  fs.writeFileSync(`${saveFolder}/${name}-new${ext}`, screenShot);
+                }
+
                 resolve(false)
               } else {
                 resolve(true)
