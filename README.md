@@ -73,7 +73,8 @@ const result = await tester(page[, name = 'test'[, screenshotOptions = {}]])
 ```
 
 - `name` <[string]> name of created screenshot 'test' by default
-- `screenshotOptions` <[Object]> options passed to Puppeteer's screenshot method [See the Puppeteer documentation for more info](https://github.com/GoogleChrome/puppeteer/blob/master/docs/api.md#pagescreenshotoptions)
+- `screenshotOptions` <[Object]> options passed to Puppeteer's screenshot method [See the Puppeteer documentation for more info](https://github.com/GoogleChrome/puppeteer/blob/master/docs/api.md#pagescreenshotoptions), _plus_ the following keys:
+  - `saveNewImageOnError`: <[boolean]> saves the undiffed new image on error as `${saveFolder}/${name}-diff${ext}`
 
 #### Returns
 - <[boolean]> true if images are the same or there is no image to compare (first run)
