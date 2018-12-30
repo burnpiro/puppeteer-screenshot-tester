@@ -8,7 +8,10 @@ const ScreenTestFactory = function(
   threshold = 0,
   includeAA = false,
   ignoreColors = false,
-  ignoreRectangles = [],
+  matchingBox = {
+    ignoreRectangles: [],
+    includeRectangles: []
+  },
   errorSettings = {
     errorColor: {
       red: 255,
@@ -18,6 +21,13 @@ const ScreenTestFactory = function(
     errorType: 'flat',
     transparency: 0.7
   }) {
+  if(Array.isArray(matchingBox)) {
+    console.error(`You're using old version of API, please refer to https://github.com/burnpiro/puppeteer-screenshot-tester/releases/tag/1.2.0`);
+    matchingBox = {
+      ignoreRectangles: matchingBox,
+      includeRectangles: []
+    }
+  }
   resemble.outputSettings(errorSettings);
   // get path to called directory
   // cannot use __directory because it returns module directory instead of caller
@@ -55,8 +65,11 @@ const ScreenTestFactory = function(
         if (ignoreColors) {
           comparisonResult.ignoreColors()
         }
-        if (ignoreRectangles.length > 0) {
-          comparisonResult.ignoreRectangles(ignoreRectangles)
+        if (Array.isArray(matchingBox.ignoreRectangles) && matchingBox.ignoreRectangles.length > 0) {
+          comparisonResult.ignoreRectangles(matchingBox.ignoreRectangles)
+        }
+        if (Array.isArray(matchingBox.includeRectangles) && matchingBox.includeRectangles.length > 0) {
+          comparisonResult.includeRectangles(matchingBox.includeRectangles)
         }
 
         // await for a comparison to be completed and return resolved value
