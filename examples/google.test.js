@@ -19,7 +19,7 @@ describe('google test', () => {
 
   it(`check if google exists`, async () => {
     // create ScreenshotTester with optional config
-    const tester = await ScreenshotTester(0.1, false, false, [], {
+    const tester = await ScreenshotTester(0.1, false, false, undefined, {
       transparency: 0.5
     })
 
