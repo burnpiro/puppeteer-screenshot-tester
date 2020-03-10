@@ -68,10 +68,8 @@ const ScreenTestFactory = function(
                 data.getDiffImage().pack().pipe(fs.createWriteStream(`${saveFolder}/${name}-diff${ext}`));
 
                 // optionally save the new image to the test directory
-                if (screenshotOptions.saveNewImageOnError) {
-                  fs.writeFileSync(`${saveFolder}/${name}-new${ext}`, screenShot);
-                }
-
+                fs.writeFileSync(`${saveFolder}/${name}${ext}`, screenShot);
+                
                 resolve(false)
               } else {
                 resolve(true)
