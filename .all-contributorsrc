@@ -26,8 +26,8 @@
       "avatar_url": "https://avatars0.githubusercontent.com/u/3769985?v=4",
       "profile": "https://github.com/maxharris9",
       "contributions": [
-       "bug",
-       "code"
+        "bug",
+        "code"
       ]
     },
     {
@@ -39,6 +39,18 @@
         "doc",
         "test"
       ]
+    },
+    {
+      "login": "JacobJust",
+      "name": "JacobJust",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/442674?v=4",
+      "profile": "https://github.com/JacobJust",
+      "contributions": [
+        "code",
+        "doc"
+      ]
     }
-  ]
+  ],
+  "skipCi": true,
+  "contributorsPerLine": 7
 }
