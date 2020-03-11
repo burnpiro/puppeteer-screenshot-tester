@@ -134,9 +134,19 @@ describe('google test', () => {
 Thanks goes to these wonderful people :sunglasses: :
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-<!-- prettier-ignore -->
-| [<img src="https://avatars0.githubusercontent.com/u/3284639?v=4" width="100px;"/><br /><sub><b>Kemal Erdem</b></sub>](https://github.com/burnpiro)<br />[💻](https://github.com/burnpiro/puppeteer-screenshot-tester/commits?author=burnpiro "Code") [📖](https://github.com/burnpiro/puppeteer-screenshot-tester/commits?author=burnpiro "Documentation") [👀](#review-burnpiro "Reviewed Pull Requests") | [<img src="https://avatars0.githubusercontent.com/u/3769985?v=4" width="100px;"/><br /><sub><b>Max Harris</b></sub>](https://github.com/maxharris9)<br />[🐛](https://github.com/burnpiro/puppeteer-screenshot-tester/issues?q=author%3Amaxharris9 "Bug reports") [💻](https://github.com/burnpiro/puppeteer-screenshot-tester/commits?author=maxharris9 "Code") | [<img src="https://avatars2.githubusercontent.com/u/426677?v=4" width="100px;"/><br /><sub><b>Andi Smith</b></sub>](http://www.andismith.com)<br />[📖](https://github.com/burnpiro/puppeteer-screenshot-tester/commits?author=andismith "Documentation") [⚠️](https://github.com/burnpiro/puppeteer-screenshot-tester/commits?author=andismith "Tests") |
-| :---: | :---: | :---: |
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="https://github.com/burnpiro"><img src="https://avatars0.githubusercontent.com/u/3284639?v=4" width="100px;" alt=""/><br /><sub><b>Kemal Erdem</b></sub></a><br /><a href="https://github.com/burnpiro/puppeteer-screenshot-tester/commits?author=burnpiro" title="Code">💻</a> <a href="https://github.com/burnpiro/puppeteer-screenshot-tester/commits?author=burnpiro" title="Documentation">📖</a> <a href="https://github.com/burnpiro/puppeteer-screenshot-tester/pulls?q=is%3Apr+reviewed-by%3Aburnpiro" title="Reviewed Pull Requests">👀</a></td>
+    <td align="center"><a href="https://github.com/maxharris9"><img src="https://avatars0.githubusercontent.com/u/3769985?v=4" width="100px;" alt=""/><br /><sub><b>Max Harris</b></sub></a><br /><a href="https://github.com/burnpiro/puppeteer-screenshot-tester/issues?q=author%3Amaxharris9" title="Bug reports">🐛</a> <a href="https://github.com/burnpiro/puppeteer-screenshot-tester/commits?author=maxharris9" title="Code">💻</a></td>
+    <td align="center"><a href="http://www.andismith.com"><img src="https://avatars2.githubusercontent.com/u/426677?v=4" width="100px;" alt=""/><br /><sub><b>Andi Smith</b></sub></a><br /><a href="https://github.com/burnpiro/puppeteer-screenshot-tester/commits?author=andismith" title="Documentation">📖</a> <a href="https://github.com/burnpiro/puppeteer-screenshot-tester/commits?author=andismith" title="Tests">⚠️</a></td>
+    <td align="center"><a href="https://github.com/JacobJust"><img src="https://avatars2.githubusercontent.com/u/442674?v=4" width="100px;" alt=""/><br /><sub><b>JacobJust</b></sub></a><br /><a href="https://github.com/burnpiro/puppeteer-screenshot-tester/commits?author=JacobJust" title="Code">💻</a> <a href="https://github.com/burnpiro/puppeteer-screenshot-tester/commits?author=JacobJust" title="Documentation">📖</a></td>
+  </tr>
+</table>
+
+<!-- markdownlint-enable -->
+<!-- prettier-ignore-end -->
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/kentcdodds/all-contributors) specification. Contributions of any kind welcome!
