@@ -143,7 +143,7 @@ const tester = await ScreenshotTester(
 )
 ```
 
-![/examples/test2-diff.png](/examples/test2-diff.png =600x)
+![/examples/test2-diff.png](/examples/test2-diff.png)
 
 ## Contributors
 
