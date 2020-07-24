@@ -43,7 +43,7 @@ const tester = await ScreenshotTester(
 - `threshold` <[number]> A threshold value <0,1> default set to 0, max ratio of difference between images
 - `includeAA` <[boolean]> Should include anti aliasing?
 - `ignoreColors` <[boolean]> Should ignore colors?
-- `ignoreRectangles` <[Array<Array[x, y, width, height]>]> Should ignore rectangles? example: `[[325,170,100,40], [10,10,200,200]]`
+- `ignoreRectangles` <[Array<Array[x, y, width, height]>]> Should ignore rectangles? example: `[[325,170,100,40], [10,10,200,200]]`, **X and Y should be the coordinates of the top-left corner**.
 - `errorSettings` <[Object]> change how to display errors (errorType: `flat` | `movement` | `flatDifferenceIntensity` | `movementDifferenceIntensity` | `diffOnly`):
     ```
     {
@@ -128,6 +128,22 @@ describe('google test', () => {
   })
 })
 ```
+
+#### Ignoring Rectangles
+
+```javascript
+const tester = await ScreenshotTester(
+    0.1, // threshold
+    false, // anti-aliasing
+    false, // ignore colors
+    [[650, 300, 700, 200]], // rectangles 
+    {
+       transparency: 0.5
+    }
+)
+```
+
+![/examples/test2-diff.png](/examples/test2-diff.png =600x)
 
 ## Contributors
 
