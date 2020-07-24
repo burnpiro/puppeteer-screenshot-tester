@@ -37,8 +37,8 @@
     "path": "^0.12.7"
   },
   "devDependencies": {
-    "all-contributors-cli": "^5.4.1",
-    "jest": "23.6.0",
-    "puppeteer": "1.11.0"
+    "all-contributors-cli": "^6.16.1",
+    "jest": "^26.1.0",
+    "puppeteer": "^5.2.1"
   }
 }
