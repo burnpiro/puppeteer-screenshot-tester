@@ -32,7 +32,7 @@
   ],
   "dependencies": {
     "fs": "^0.0.1-security",
-    "node-resemble-js": "^0.2.0",
+    "node-resemble-js": "git://github.com/burnpiro/node-resemble.js.git#0.3.0",
     "parent-module": "^0.1.0",
     "path": "^0.12.7"
   },
