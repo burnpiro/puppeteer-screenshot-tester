@@ -1,4 +1,4 @@
-const resemble = require('node-resemble-js');
+const resemble = require('nodejs-resemble');
 const fs = require('fs');
 const parentModule = require('parent-module');
 const path = require('path');
