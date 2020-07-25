@@ -36,14 +36,16 @@ const tester = await ScreenshotTester()
 #### Optional arguments:
 ```js
 const tester = await ScreenshotTester(
-  [threshold = 0][, includeAA = false[, ignoreColors = false[, ignoreRectangles = [] [, errorSettings = Object]]]]
+  [threshold = 0][, includeAA = false[, ignoreColors = false[, matchingBox = { ignoreRectangles = [], includeRectangle = [] } [, errorSettings = Object]]]]
 )
 ```
 
 - `threshold` <[number]> A threshold value <0,1> default set to 0, max ratio of difference between images
 - `includeAA` <[boolean]> Should include anti aliasing?
 - `ignoreColors` <[boolean]> Should ignore colors?
-- `ignoreRectangles` <[Array<Array[x, y, width, height]>]> Should ignore rectangles? example: `[[325,170,100,40], [10,10,200,200]]`, **X and Y should be the coordinates of the top-left corner**.
+- `matchingBox` <[Object]> Restrict what should be compared
+- `matchingBox.ignoreRectangles` <[Array<Array[x, y, width, height]>]> Should ignore rectangles? example: `[[325,170,100,40], [10,10,200,200]]`, **X and Y should be the coordinates of the top-left corner**
+- `matchingBox.includeRectangle` <[Array<Array[x, y, width, height]>]> Compare only part of screen? example: `[[325,170,100,40], [10,10,200,200]]`, **X and Y should be the coordinates of the top-left corner**
 - `errorSettings` <[Object]> change how to display errors (errorType: `flat` | `movement` | `flatDifferenceIntensity` | `movementDifferenceIntensity` | `diffOnly`):
     ```
     {
