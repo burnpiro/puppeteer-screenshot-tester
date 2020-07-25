@@ -131,14 +131,17 @@ describe('google test', () => {
 })
 ```
 
-#### Ignoring Rectangles
+#### Ignoring Rectangles and Including rectangles
 
 ```javascript
 const tester = await ScreenshotTester(
     0.1, // threshold
     false, // anti-aliasing
     false, // ignore colors
-    [[650, 300, 700, 200]], // rectangles 
+    { 
+      ignoreRectangles: [[650, 300, 700, 200]], 
+      includeRectangles: [[300, 200, 1100, 1100]]
+    }, // rectangles 
     {
        transparency: 0.5
     }
