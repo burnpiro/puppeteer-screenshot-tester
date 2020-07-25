@@ -19,7 +19,7 @@ describe('google test', () => {
 
   it(`check if google exists`, async () => {
     // create ScreenshotTester with optional config
-    const tester = await ScreenshotTester(0.1, false, false, [[650, 300, 700, 200]], {
+    const tester = await ScreenshotTester(0.1, false, false, { ignoreRectangles: [[650, 300, 700, 200]], includeRectangles: [[300, 200, 1100, 1100]]}, {
       transparency: 0.5
     })
 
