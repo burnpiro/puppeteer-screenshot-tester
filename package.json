@@ -33,12 +33,12 @@
   "dependencies": {
     "fs": "^0.0.1-security",
     "nodejs-resemble": "^0.3.0",
-    "parent-module": "^0.1.0",
+    "parent-module": "^2.0.0",
     "path": "^0.12.7"
   },
   "devDependencies": {
-    "all-contributors-cli": "^6.16.1",
-    "jest": "^26.1.0",
-    "puppeteer": "^5.2.1"
+    "all-contributors-cli": "^6.20.0",
+    "jest": "^26.6.3",
+    "puppeteer": "^8.0.0"
   }
 }
