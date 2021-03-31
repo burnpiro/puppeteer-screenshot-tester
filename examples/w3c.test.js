@@ -1,7 +1,7 @@
 const puppeteer = require('puppeteer')
 const ScreenshotTester = require('../src/index')
 
-describe('google test', () => {
+describe('w3c history test', () => {
   let originalTimeout
 
   // extend default interval to 10s because some image processing might take some time
@@ -17,7 +17,7 @@ describe('google test', () => {
     jasmine.DEFAULT_TIMEOUT_INTERVAL = originalTimeout
   })
 
-  it(`check if google exists`, async () => {
+  it(`check w3c history changed`, async () => {
     // create ScreenshotTester with optional config
     const tester = await ScreenshotTester(0.1, false, false, { ignoreRectangles: [[650, 300, 700, 200]], includeRectangles: [[300, 200, 1100, 1100]]}, {
       transparency: 0.5
@@ -27,12 +27,11 @@ describe('google test', () => {
     const browser = await puppeteer.launch({headless: false})
     const page = await browser.newPage()
     await page.setViewport({width: 1920, height: 1080})
-    await page.goto('https://www.google.com', { waitUntil: 'networkidle0' })
-    await page.type('input', 'hi', { delay: 100 })
+    await page.goto('https://www.w3.org/History.html', { waitUntil: 'networkidle0' })
 
     // call our tester with browser page returned by puppeteer browser
     // second parameter is optional it's just a test name if provide that's filename
-    const result = await tester(page, 'test2', {
+    const result = await tester(page, 'test_screen', {
       fullPage: true,
       saveNewImageOnError: true
     })
