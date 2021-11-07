@@ -34,7 +34,8 @@
     "fs": "^0.0.1-security",
     "nodejs-resemble": "^0.4.1",
     "parent-module": "^2.0.0",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "sharp": "^0.29.2"
   },
   "devDependencies": {
     "all-contributors-cli": "^6.20.0",

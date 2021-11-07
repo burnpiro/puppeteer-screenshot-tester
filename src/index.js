@@ -2,6 +2,10 @@ const resemble = require('nodejs-resemble');
 const fs = require('fs');
 const parentModule = require('parent-module');
 const path = require('path');
+const sharp = require('sharp');
+
+const DEFAULT_COMPRESSION = 85;
+const DEFAULT_PNG_COMPRESSION = 8;
 
 // currying everywhere, that allows us to create one setup and then use tester without copying config each time
 const ScreenTestFactory = function(
@@ -20,6 +24,10 @@ const ScreenTestFactory = function(
     },
     errorType: 'flat',
     transparency: 0.7
+  },
+  outputSettings = {
+    forceExt: null,
+    compressionLevel: null
   }) {
   if(Array.isArray(matchingBox)) {
     console.error(`You're using old version of API, please refer to https://github.com/burnpiro/puppeteer-screenshot-tester/releases/tag/1.3.0`);
@@ -35,7 +43,7 @@ const ScreenTestFactory = function(
   return new Promise( resolve => {
     resolve(async (page, name = 'test', screenshotOptions = {}) => {
       let saveFolder = folderPath;
-      let ext = '.png';
+      let ext = screenshotOptions.type ? `.${screenshotOptions.type}` : '.png';
       if(screenshotOptions.path != null) {
         const puppeteerExt = path.extname(screenshotOptions.path);
         const puppeteerPath = path.dirname(screenshotOptions.path);
@@ -78,13 +86,37 @@ const ScreenTestFactory = function(
               // check if images are the same dimensions and mismatched pixels are below threshold
               if (data.isSameDimensions === false || Number(data.misMatchPercentage) > threshold) {
                 // save diff to test folder with '-diff' postfix
-                data.getDiffImage().pack().pipe(fs.createWriteStream(`${saveFolder}/${name}-diff${ext}`));
+                const storeExt = outputSettings.forceExt != null ? outputSettings.forceExt : ext.substring(ext.lastIndexOf(".")+1);
+                const extFormatter = {
+                  'jpeg': () => sharp().jpeg({ quality: outputSettings.compressionLevel || DEFAULT_COMPRESSION }),
+                  'jpg': () => sharp().jpeg({ quality: outputSettings.compressionLevel || DEFAULT_COMPRESSION }),
+                  'png': () => sharp().png({ compressionLevel: outputSettings.compressionLevel | DEFAULT_PNG_COMPRESSION }),
+                  'webp': () => sharp().webp({ quality: outputSettings.compressionLevel || DEFAULT_COMPRESSION })
+                }
+                data.getDiffImage().pack()
+                  .pipe(extFormatter[storeExt]())
+                  .pipe(fs.createWriteStream(`${saveFolder}/${name}-diff${ext}`));
 
                 // optionally save the new image to the test directory
-                if (screenshotOptions.saveNewImageOnError) {
-                  fs.writeFileSync(`${saveFolder}/${name}-new${ext}`, screenShot);
-                } else if (screenshotOptions.overwriteImageOnChange) {
-                  fs.writeFileSync(`${saveFolder}/${name}${ext}`, screenShot);
+                if (screenshotOptions.saveNewImageOnError || screenshotOptions.overwriteImageOnChange) {
+                  const newFilePath = screenshotOptions.overwriteImageOnChange ? `${saveFolder}/${name}${ext}` : `${saveFolder}/${name}-new${ext}`;
+                  switch (storeExt) {
+                    case 'jpeg':
+                    case 'jpg':
+                      sharp(screenShot)
+                        .jpeg({quality: outputSettings.compressionLevel || DEFAULT_COMPRESSION})
+                        .toFile(newFilePath);
+                      break;
+                    case 'webp':
+                      sharp(screenShot)
+                        .webp({quality: outputSettings.compressionLevel || DEFAULT_COMPRESSION})
+                        .toFile(newFilePath);
+                      break;
+                    default:
+                      sharp(screenShot)
+                        .png({quality: outputSettings.compressionLevel || DEFAULT_PNG_COMPRESSION})
+                        .toFile(newFilePath);
+                  }
                 }
 
 
@@ -96,7 +128,25 @@ const ScreenTestFactory = function(
         });
       } else {
         // if there is no old image we cannot compare two images so just write existing screenshot as default image
-        fs.writeFileSync(`${saveFolder}/${name}${ext}`, screenShot);
+        // fs.writeFileSync(`${saveFolder}/${name}${ext}`, screenShot);
+        const storeExt = outputSettings.forceExt != null ? outputSettings.forceExt : ext.substring(ext.lastIndexOf(".")+1);
+        switch (storeExt) {
+          case 'jpeg':
+          case 'jpg':
+            await sharp(screenShot)
+              .jpeg({ quality: outputSettings.compressionLevel || DEFAULT_COMPRESSION })
+              .toFile(`${saveFolder}/${name}${ext}`);
+            break;
+          case 'webp':
+            await sharp(screenShot)
+              .webp({ quality: outputSettings.compressionLevel || DEFAULT_COMPRESSION })
+              .toFile(`${saveFolder}/${name}${ext}`);
+            break;
+          default:
+            await sharp(screenShot)
+              .png({ quality: outputSettings.compressionLevel || DEFAULT_PNG_COMPRESSION })
+              .toFile(`${saveFolder}/${name}${ext}`);
+        }
         console.log('There was nothing to compare, current screens saved as default');
         return true;
       }

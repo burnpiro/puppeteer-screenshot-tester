@@ -21,7 +21,7 @@ describe('w3c history test', () => {
     // create ScreenshotTester with optional config
     const tester = await ScreenshotTester(0.1, false, false, { ignoreRectangles: [[650, 300, 700, 200]], includeRectangles: [[300, 200, 1100, 1100]]}, {
       transparency: 0.5
-    })
+    }, { compressionLevel: 50 })
 
     // setting up puppeteer
     const browser = await puppeteer.launch({headless: false})
@@ -33,6 +33,7 @@ describe('w3c history test', () => {
     // second parameter is optional it's just a test name if provide that's filename
     const result = await tester(page, 'test_screen', {
       fullPage: true,
+      type: 'webp',
       saveNewImageOnError: true
     })
     await browser.close()
