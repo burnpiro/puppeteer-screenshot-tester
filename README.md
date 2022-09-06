@@ -67,9 +67,17 @@ const tester = await ScreenshotTester(
     {
       forceExt: 'jpeg' | 'png' | 'webp' | null,
       compressionLevel: 8 // 0-9 for .png, 0-100 otherwise
+      overrides: {} // valid sharp options (see bellow)
     }
     ```
 - returns: <[function]> resolves to function
+
+#### overrides:
+
+You can override options passed to [sharp image processor](https://sharp.pixelplumbing.com/). Just paste the `overrides` object that corresponds with sharp options:
+- .png [Options](https://sharp.pixelplumbing.com/api-output#png)
+- .webp [Options](https://sharp.pixelplumbing.com/api-output#webp)
+- .jpeg/jpg [Options](https://sharp.pixelplumbing.com/api-output#jpeg)
 
 ### Run the test
 

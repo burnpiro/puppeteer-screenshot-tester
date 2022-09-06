@@ -27,7 +27,8 @@ const ScreenTestFactory = function(
   },
   outputSettings = {
     forceExt: null,
-    compressionLevel: null
+    compressionLevel: null,
+    overrides: {}
   }) {
   if(Array.isArray(matchingBox)) {
     console.error(`You're using old version of API, please refer to https://github.com/burnpiro/puppeteer-screenshot-tester/releases/tag/1.3.0`);
@@ -87,11 +88,12 @@ const ScreenTestFactory = function(
               if (data.isSameDimensions === false || Number(data.misMatchPercentage) > threshold) {
                 // save diff to test folder with '-diff' postfix
                 const storeExt = outputSettings.forceExt != null ? outputSettings.forceExt : ext.substring(ext.lastIndexOf(".")+1);
+                const overrides = outputSettings.overrides || {};
                 const extFormatter = {
-                  'jpeg': () => sharp().jpeg({ quality: outputSettings.compressionLevel || DEFAULT_COMPRESSION }),
-                  'jpg': () => sharp().jpeg({ quality: outputSettings.compressionLevel || DEFAULT_COMPRESSION }),
-                  'png': () => sharp().png({ compressionLevel: outputSettings.compressionLevel | DEFAULT_PNG_COMPRESSION }),
-                  'webp': () => sharp().webp({ quality: outputSettings.compressionLevel || DEFAULT_COMPRESSION })
+                  'jpeg': () => sharp().jpeg({ quality: outputSettings.compressionLevel || DEFAULT_COMPRESSION, ...overrides }),
+                  'jpg': () => sharp().jpeg({ quality: outputSettings.compressionLevel || DEFAULT_COMPRESSION, ...overrides }),
+                  'png': () => sharp().png({ compressionLevel: outputSettings.compressionLevel || DEFAULT_PNG_COMPRESSION, ...overrides }),
+                  'webp': () => sharp().webp({ quality: outputSettings.compressionLevel || DEFAULT_COMPRESSION, ...overrides })
                 }
                 data.getDiffImage().pack()
                   .pipe(extFormatter[storeExt]())
@@ -104,17 +106,17 @@ const ScreenTestFactory = function(
                     case 'jpeg':
                     case 'jpg':
                       sharp(screenShot)
-                        .jpeg({quality: outputSettings.compressionLevel || DEFAULT_COMPRESSION})
+                        .jpeg({quality: outputSettings.compressionLevel || DEFAULT_COMPRESSION, ...overrides})
                         .toFile(newFilePath);
                       break;
                     case 'webp':
                       sharp(screenShot)
-                        .webp({quality: outputSettings.compressionLevel || DEFAULT_COMPRESSION})
+                        .webp({quality: outputSettings.compressionLevel || DEFAULT_COMPRESSION, ...overrides})
                         .toFile(newFilePath);
                       break;
                     default:
                       sharp(screenShot)
-                        .png({quality: outputSettings.compressionLevel || DEFAULT_PNG_COMPRESSION})
+                        .png({compressionLevel: outputSettings.compressionLevel || DEFAULT_PNG_COMPRESSION, ...overrides})
                         .toFile(newFilePath);
                   }
                 }
@@ -130,21 +132,22 @@ const ScreenTestFactory = function(
         // if there is no old image we cannot compare two images so just write existing screenshot as default image
         // fs.writeFileSync(`${saveFolder}/${name}${ext}`, screenShot);
         const storeExt = outputSettings.forceExt != null ? outputSettings.forceExt : ext.substring(ext.lastIndexOf(".")+1);
+        const overrides = outputSettings.overrides || {};
         switch (storeExt) {
           case 'jpeg':
           case 'jpg':
             await sharp(screenShot)
-              .jpeg({ quality: outputSettings.compressionLevel || DEFAULT_COMPRESSION })
+              .jpeg({ quality: outputSettings.compressionLevel || DEFAULT_COMPRESSION, ...overrides })
               .toFile(`${saveFolder}/${name}${ext}`);
             break;
           case 'webp':
             await sharp(screenShot)
-              .webp({ quality: outputSettings.compressionLevel || DEFAULT_COMPRESSION })
+              .webp({ quality: outputSettings.compressionLevel || DEFAULT_COMPRESSION, ...overrides })
               .toFile(`${saveFolder}/${name}${ext}`);
             break;
           default:
             await sharp(screenShot)
-              .png({ quality: outputSettings.compressionLevel || DEFAULT_PNG_COMPRESSION })
+              .png({ compressionLevel: outputSettings.compressionLevel || DEFAULT_PNG_COMPRESSION, ...overrides })
               .toFile(`${saveFolder}/${name}${ext}`);
         }
         console.log('There was nothing to compare, current screens saved as default');
